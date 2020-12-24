@@ -1,0 +1,172 @@
+paths:
+  '/roles/list':
+    get:
+      tags:
+        - 'Roles'
+      summary: 'List out all the entities'
+      operationId: 'list'
+      security:
+        - AccessToken: []
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesListApiResponse'
+      x-swagger-router-controller: 'roles'
+  '/roles/metadata':
+    get:
+      tags:
+        - 'Roles'
+      summary: 'metadata for dynamic UI'
+      operationId: 'metadata'
+      security: []  
+      parameters:
+        - name: fields
+          in: query
+          description: field values that need to be considered for filter
+          explode: false
+          style: form
+          allowReserved: true               
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid request
+      x-swagger-router-controller: 'roles'
+  '/roles/search':
+    post:
+      tags:
+        - 'Roles'
+      summary: search/filter the entities list
+      description: created search/filter object.
+      operationId: 'search'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesListApiResponse'
+      x-swagger-router-controller: 'roles'
+  '/roles/search/summary':
+    post:
+      tags:
+        - 'Roles'
+      summary: search/filter the entities list
+      description: created search/filter object.
+      operationId: 'summary'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesListApiResponse'
+      x-swagger-router-controller: 'roles'
+  '/roles/{roleId}':
+    get:
+      tags:
+        - 'Roles'
+      summary: Find role by ID
+      description: Returns a single role
+      operationId: 'get'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: roleId
+          in: path
+          description: ID of role to return
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesApiResponse'
+        '400':
+          description: Invalid role Id supplied
+        '404':
+          description: role not found
+      x-swagger-router-controller: 'roles'
+    post:
+      tags:
+        - 'Roles'
+      summary: update an role
+      operationId: 'update'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: roleId
+          in: path
+          description: ID of role to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/roles'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesApiResponse'
+      x-swagger-router-controller: 'roles'
+  '/roles/{roleId}/delete':
+    post:
+      tags:
+        - 'Roles'
+      summary: Deletes a role
+      operationId: 'delete'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: roleId
+          in: path
+          description: role id to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid role Id supplied
+        '404':
+          description: role not found
+      x-swagger-router-controller: 'roles'
+  '/roles':
+    post:
+      tags:
+        - 'Roles'
+      summary: Create role
+      description: This can only be done by the logged in role.
+      operationId: 'create'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/Roles'
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: 'roles'

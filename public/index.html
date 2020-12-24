@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stellar</title>
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <style>
+        /* Use the following CSS rules to specify these families */
+
+        body {
+            line-height: 1.7em;
+            font-family: 'Roboto', serif;
+        }
+
+        .stellar-ui {
+            font-family: sans-serif;
+            color: #3b4151;
+        }
+
+        .stellar-ui .topbar {
+            padding: 8px 0;
+            background-color: #505050;
+            color: #fff;
+        }
+
+        .stellar-ui .wrapper {
+            width: 100%;
+            max-width: 1460px;
+            margin: 0 auto;
+            padding: 0 20px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .stellar-ui .topbar .topbar-wrapper,
+        .stellar-ui .topbar a {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .stellar-ui .topbar a {
+            font-size: 1.5em;
+            font-weight: 700;
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            max-width: 300px;
+            text-decoration: none;
+            font-family: sans-serif;
+            color: #fff;
+        }
+
+        .stellar-ui img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <section data-reactroot="" class="stellar-ui stellar-container">
+        <div class="topbar">
+            <div class="wrapper">
+                <div class="topbar-wrapper">
+                    <a rel="noopener noreferrer" class="link">
+                        <!-- <img height="30" width="30" src="top-logo-min.png"
+                            alt="Stellar Interactive API">-->
+                        <span>Stellar Account</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <ul>
+                    <li>
+                        <a href="/v1/docs/">Interactive API Doc!</a>
+                    </li>
+                    <!-- <li>
+                    <a href="/graphql/">GraphQL Playground!</a>
+                </li> -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

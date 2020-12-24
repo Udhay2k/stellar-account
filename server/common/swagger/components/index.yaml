@@ -1,0 +1,451 @@
+components:
+  schemas:
+    Common:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+
+    Enum_obj:
+      type: object
+      properties:
+        displayName:
+          type: string
+        value:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        status:
+          type: boolean
+          default: false
+        message:
+          type: string
+      required:
+        - status
+        - message
+
+    Pagination:
+      type: 'object'
+      properties:
+        count:
+          type: integer
+        more:
+          type: 'boolean'
+          default: false
+        offset:
+          type: integer
+        page:
+          type: integer
+        total:
+          type: integer
+      example:
+        count: 10
+        more: true
+        offset: 10
+        page: 1
+        total: 100
+
+    Search:
+      type: 'object'
+      properties:
+        count:
+          type: integer
+        order:
+          type: array
+          items:
+            type: object
+        page:
+          type: integer
+        term:
+          type: string
+        termfields:
+          type: array
+          items:
+            type: string
+        fields:
+          type: array
+          items:
+            type: string
+        filter:
+          type: object
+        exclude:
+          type: array
+          items:
+            type: string
+        include:
+          type: array
+          items:
+            type: string
+      example:
+        count: 10
+        order: [{field: '_id', order: 'asc'}]
+        page: 1
+        term: ''
+        fields: []
+        termfields: []
+        filter: {}
+        exclude: []
+        include: []
+
+    Account:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        gender:
+          type: string
+          x-nullable: true
+          enum:
+            - 'male'
+            - 'female'
+            - 'other'
+            - ''
+        dob:
+          type: string
+          description: 'Date of Birth'
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Common'
+        organization:
+          $ref: '#/components/schemas/Common'            
+
+    AccountUpdate:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        gender:
+          type: string
+          x-nullable: true
+          enum:
+            - 'male'
+            - 'female'
+            - 'other'
+            - ''
+        dob:
+          type: string
+          description: 'Date of Birth'
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+
+    resetmypassword:
+      type: object
+      properties:
+        newPassword:
+          type: string
+
+    userObject:
+      type: object
+      properties:
+        _id:
+          type: string
+        type:
+          type: string
+        name:
+          type: string          
+
+    changepassword:
+      type: object
+      properties:
+        oldpassword:
+          type: string
+        newpassword:
+          type: string
+
+    signup:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+        gender:
+          type: string
+          x-nullable: true
+          enum:
+            - 'male'
+            - 'female'
+            - 'other'
+            - ''
+        dob:
+          type: string
+          description: 'Date of Birth'
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Common'
+
+    Roles:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+
+    Organization:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        contact:
+          type: string
+        message:
+          type: string    
+        active:
+          type: boolean                
+
+    AccountListApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+
+    AccountApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        results:
+          $ref: '#/components/schemas/Account'
+
+    RolesListApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Roles'
+
+    RolesApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        results:
+          $ref: '#/components/schemas/Roles'
+
+    CommonListApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Common'
+
+    CommonApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        results:
+          $ref: '#/components/schemas/Common'
+
+    OrganizationListApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+
+    OrganizationApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        results:
+          $ref: '#/components/schemas/Organization'
+
+  requestBodies:
+    Account:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Account'
+      description: Account object that needs to be added to the db
+      x-name: body
+      required: true
+
+    AccountUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountUpdate'
+      description: Account object that needs to be updated to the db
+      x-name: body
+      required: true      
+
+    SignUp:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/signup'
+      description: Account object that needs to be added to the db
+      x-name: body
+      required: true
+
+    UserProfileImage:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 'Name of image'
+              upfile:
+                type: string
+                format: binary             
+      description: upload object to profile image
+      x-name: body
+
+    ChangePassword:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/changepassword'
+      description: Account object that needs to be added to the db
+      x-name: body
+      required: true
+
+    ResetMypassword:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/resetmypassword'
+      description: Account object that needs to be added to the db
+      x-name: body
+      required: true
+
+    Roles:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Roles'
+      description: Roles object that needs to be added to the db
+      x-name: body
+      required: true
+
+    Organization:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Organization'
+      description: Entity object that needs to be added to the db
+      x-name: body
+      required: true
+
+    Search:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Search'
+      description: get the users list based on query
+      x-name: body
+      required: true
+
+    AccountArray:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Account'
+      description: List of user object
+      required: true
+
+  securitySchemes:
+    AccessToken:
+      type: apiKey
+      name: authorization
+      in: header
+security:
+  - AccessToken: []

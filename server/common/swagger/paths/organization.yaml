@@ -1,0 +1,169 @@
+paths:
+  '/organization/list':
+    get:
+      tags:
+        - 'Organization'
+      summary: 'List out all the organizations'
+      operationId: 'list'
+      security: []  
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationListApiResponse'
+      x-swagger-router-controller: 'organization'
+  '/organization/metadata':
+    get:
+      tags:
+        - 'Organization'
+      summary: 'metadata for dynamic UI'
+      operationId: 'metadata'
+      security: []  
+      parameters:
+        - name: fields
+          in: query
+          description: field values that need to be considered for filter
+          explode: false
+          style: form
+          allowReserved: true               
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid request
+      x-swagger-router-controller: 'organization'
+  '/organization/search':
+    post:
+      tags:
+        - 'Organization'
+      summary: search/filter the organizations list
+      description: created search/filter object.
+      operationId: 'search'
+      security: []  
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationListApiResponse'
+      x-swagger-router-controller: 'organization'
+  '/organization/search/summary':
+    post:
+      tags:
+        - 'Organization'
+      summary: search/filter the organizations list
+      description: created search/filter object.
+      operationId: 'summary'
+      security: []  
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationListApiResponse'
+      x-swagger-router-controller: 'organization'
+  '/organization/{orgId}':
+    get:
+      tags:
+        - 'Organization'
+      summary: Find organization by ID
+      description: Returns a single organization
+      operationId: 'get'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: orgId
+          in: path
+          description: ID of organization to return
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationApiResponse'
+        '400':
+          description: Invalid organization Id supplied
+        '404':
+          description: organization not found
+      x-swagger-router-controller: 'organization'
+    post:
+      tags:
+        - 'Organization'
+      summary: update an organization
+      operationId: 'update'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: orgId
+          in: path
+          description: ID of organization to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Organization'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationApiResponse'
+      x-swagger-router-controller: 'organization'
+  '/organization/{orgId}/delete':
+    post:
+      tags:
+        - 'Organization'
+      summary: Deletes a organization
+      operationId: 'delete'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: orgId
+          in: path
+          description: organization id to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid organization Id supplied
+        '404':
+          description: organization not found
+      x-swagger-router-controller: 'organization'
+  '/organization':
+    post:
+      tags:
+        - 'Organization'
+      summary: Create organization
+      description: This can only be done by the logged in organization.
+      operationId: 'create'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/Organization'
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: 'organization'

@@ -1,0 +1,7 @@
+tags:
+- name: Account
+  description: Operations about User Account
+- name: Organization
+  description: Operations about Organization      
+- name: Roles
+  description: Operations about Permission
