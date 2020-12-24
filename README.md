@@ -1,12 +1,8 @@
-# stellar-microservice-starter
+# Stellar Microservice
 ---
-
-![nxplorer microservice starter](public/logo.png)
 
 Cloud Native Node JS Express Reactive Microservice Starter Template (REST/GraphQL)
 This project provides complete Node JS / Typescript based microservices template with all that will be needed features for production deployment , monitoring , debugging , logging , security , CI/CD. Reactive extensions based samples are added as well to demonstrate how this can be used for building a microservice API edge-service , a backend for frontend or use it as a base for building any kind of microservice.
-
-![architecture vision](screenshots/express-microservice-starter.png)
 
 # Table of contents
 
@@ -91,23 +87,6 @@ This project provides complete Node JS / Typescript based microservices template
 
 See REST API /examples/{id}
 
-```json
-{
-  "pid": 3984,
-  "hostname": "LP-507B9DA1D355",
-  "level": 30,
-  "time": 1515813665734,
-  "0": {
-    "socket": 5.656709999995655,
-    "lookup": 186.8375229999947,
-    "connect": 389.5646870000055,
-    "response": 594.8022639999981,
-    "end": 599.1270230000082
-  },
-  "v": 1
-}
-```
-
 ### REST APIs
 - The API Spec can be downloaded using the following URLS
 ```
@@ -125,100 +104,6 @@ http://localhost:3000/api-docs/
 - metrics - Prometheus based metrics added for all APIs (/metrics)
 - API Partial JSON response support
 
-```bash
-    curl http://localhost:3000/api/v1/starwars/people/1
-```
-
-- Response
-
-```bash
-    {
-        name: "Luke Skywalker",
-        height: "172",
-        mass: "77",
-        hair_color: "blond",
-        skin_color: "fair",
-        eye_color: "blue",
-        birth_year: "19BBY",
-        gender: "male",
-        homeworld: {
-        name: "Tatooine",
-        rotation_period: "23",
-        orbital_period: "304",
-        diameter: "10465",
-        climate: "arid",
-        gravity: "1 standard",
-        terrain: "desert",
-        surface_water: "1",
-        population: "200000",
-        residents: [
-        "http://swapi.co/api/people/1/",
-        "http://swapi.co/api/people/2/",
-        "http://swapi.co/api/people/4/",
-        "http://swapi.co/api/people/6/",
-        "http://swapi.co/api/people/7/",
-        "http://swapi.co/api/people/8/",
-        "http://swapi.co/api/people/9/",
-        "http://swapi.co/api/people/11/",
-        "http://swapi.co/api/people/43/",
-        "http://swapi.co/api/people/62/"
-        ],
-        films: [
-        "http://swapi.co/api/films/5/",
-        "http://swapi.co/api/films/4/",
-        "http://swapi.co/api/films/6/",
-        "http://swapi.co/api/films/3/",
-        "http://swapi.co/api/films/1/"
-        ],
-        created: "2014-12-09T13:50:49.641000Z",
-        edited: "2014-12-21T20:48:04.175778Z",
-        url: "http://swapi.co/api/planets/1/"
-        },
-        films: [
-        "http://swapi.co/api/films/2/",
-        "http://swapi.co/api/films/6/",
-        "http://swapi.co/api/films/3/",
-        "http://swapi.co/api/films/1/",
-        "http://swapi.co/api/films/7/"
-        ],
-        species: [
-        "http://swapi.co/api/species/1/"
-        ],
-        vehicles: [
-        "http://swapi.co/api/vehicles/14/",
-        "http://swapi.co/api/vehicles/30/"
-        ],
-        starships: [
-        "http://swapi.co/api/starships/12/",
-        "http://swapi.co/api/starships/22/"
-        ],
-        created: "2014-12-09T13:50:51.644000Z",
-        edited: "2014-12-20T21:17:56.891000Z",
-        url: "http://swapi.co/api/people/1/"
-        }
-```
-
----
-
-```bash
-    curl http://localhost:3000/api/v1/starwars/people/1?data(name,gender,homeworld(gravity,population))
-```
-
-- Response
-
-```bash
-    {
-      "data": {
-        "name": "Luke Skywalker",
-        "gender": "male",
-        "homeworld": {
-          "gravity": "1 standard",
-          "population": "200000"
-        }
-      }
-    }
-```
-
 ### GraphQL
 
 - GraphQL support has been added based on the [apollo framework](https://github.com/apollographql) and a reference implementation (including the starwars apis from swapi.co)
@@ -227,49 +112,6 @@ http://localhost:3000/api-docs/
 - Access the graphiql tool from http://localhost:3000/graphiql
 - GraphQL API tracing (configurable)
 - Dataloader for caching and batching
-- Multiple samples added **Dataloader Enabled**
-  - RxJS API call - peopleWithPlanets(id : <number>)
-  - Starwars APIs - people(id: <number>) , planet(id: <number>) , starship(id: <number>) - peopleList(keys: [number])
-- List of Queries (see schema details for complete list)
-
-  - quoteOfTheDay: String
-  - random: Float
-  - examples: [ExampleType] <-- [**JWT Authentication. Please read the JWT Security section for details**](#jwt-security-graphql)
-  - example(id: Int): ExampleType
-  - blog(id: Int) (Paginated query)
-  - rollThreeDice: [Int]
-  - peopleWithPlanet(id: Int): PeopleWithPlanetType (Uses RxJS to combine results from 2 APIs)
-  - peopleDS(id: Int): PersonType (Based on REST DataSource)
-  - people(id: Int): PersonType (Based on data loader)
-  - planet(id: Int): PlanetType
-  - starship(id: Int): StarshipType
-  - peopleList(keys: [Int]): [PersonType]
-  - movie: MovieType
-
-  - Sample Query Execution
-
-![Sample Query](screenshots/query_1.PNG)
-
-- Mutations
-
-  - addExample(name: String!): ExampleType
-  - addComment(comment: CommentInput!): Comment
-  - login(email: String!,password: String!): UserType
-
-  - Sample Mutation Execution
-
-  ![Sample Mutation](screenshots/mutation_1.PNG)
-
-  - Subscriptions
-
-    - exampleAdded (Will check whenever a new element is added via a mutation)
-    - commentAdded (Will check whenever a new comment is added via a mutation)
-
-  - Sample Subscription Execution
-
-  ![Sample Subscription step 1](screenshots/subscription_1.PNG)
-  ![Sample Subscription step 2](screenshots/subscription_2.PNG)
-
 - VSCode Debug Launch Configuration (Preconfigured Debug Launcher added)
 - Node Dashboard view added for telemetry during development process
 - Added NodeJS cluster mode (load balanced workers)
@@ -441,22 +283,6 @@ npm itest:run
 
 - A sample implementation of UUID propogation has been added. This depends on a cookie 'UUID' to be set in the request object. The [LogService](server/common/services/log.service.ts) will add the uuid to all logs it generates.
 
-- For example if 'UUID' is set to xxxx-dddd-ssss-wwww-ssss then calling the /shop/products API will produce
-
-```json
-{
-  "pid": 13492,
-  "hostname": "LP-507B9DA1D355",
-  "level": 30,
-  "time": 1515859200496,
-  "uuid": "xxxx-dddd-ssss-wwww-ssss",
-  "fullUrl": "http://localhost:3000/api/v1/shop/products",
-  "statusCode": 200,
-  "responseTime": "1.187",
-  "v": 1
-}
-```
-
 ### GraphQL Mocks
 
 - As part of TDD we may need to mock the graphql responses till we are able to implement the resolvers
@@ -468,15 +294,6 @@ npm itest:run
 - Sample output is given below
 
 ![Sample Mock output](screenshots/graphql_mock.PNG)
-
-### RestAPI Mocks
-
-- Enable `API_MOCK=true` in the `.<Profile>.env` file . Note: For security this will not work in production mode even if `API_MOCK` is set to `true`
-- The `swagger-express-middleware` module provides out of the box support for [automated mock generation](https://github.com/BigstickCarpet/swagger-express-middleware/blob/master/docs/middleware/mock.md)
-- Steps
-  - Define the API swagger specification in [Api.yaml file](server/common/swagger/Api.yaml)
-  - If there is no implementation available in the express routes, the middleware creates mocks for those apis
-- Access the swagger ui provided by nXplorer (/swagger) and refer to the apis tagged `Mock API` and with prefix `/mock`.The sample has two main entities - cars and drivers. You can search , perform CRUD operations as well as upload and download images.
 
 #### Build Docker image
 
@@ -647,15 +464,6 @@ npm run compile
 docker-compose build
 docker-compose up
 ```
-
-- On Docker set up the port forwarding for 3000 and 8080
-
-![port forwarding](screenshots/port-forwarding.PNG)
-
-- Access the Hystrix dashboard at localhost:8080/hystrix and set the stream location to `localhost:3001/hystrix.stream`
-- Execute the samples under /api/v1/hystrix and view the hystrix stream results on the dashboard
-
-![hystrix stream](screenshots/Hystrix.PNG)
 
 ### integrate with SonarQube (for continous code quality)
 
