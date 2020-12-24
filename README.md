@@ -1,10 +1,4 @@
-# nxplorerjs-microservice-starter
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/ERS-HCL/nxplorerjs-microservice-starter.svg)](https://greenkeeper.io/)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FERS-HCL%2Fnxplorerjs-microservice-starter.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FERS-HCL%2Fnxplorerjs-microservice-starter?ref=badge_shield)
-
-[![Build Status](https://travis-ci.org/ERS-HCL/nxplorerjs-microservice-starter.svg?branch=master)](https://travis-ci.org/ERS-HCL/nxplorerjs-microservice-starter) [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest) [![GitHub version](https://badge.fury.io/gh/ERS-HCL%2Fnxplorerjs-microservice-starter.svg)](https://badge.fury.io/gh/ERS-HCL%2Fnxplorerjs-microservice-starter) [![Dependency Status](https://david-dm.org/ERS-HCL/nxplorerjs-microservice-starter.svg)](https://david-dm.org/ERS-HCL/nxplorerjs-microservice-starter) [![DeepScan grade](https://deepscan.io/api/projects/2880/branches/21484/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=2880&bid=21484)
-
+# stellar-microservice-starter
 ---
 
 ![nxplorer microservice starter](public/logo.png)
@@ -64,15 +58,6 @@ This project provides complete Node JS / Typescript based microservices template
 - Provide a starter for both the business APIs and microservice platform development.
 - DevOps ready with code quality, unit & integration tests, deployment automated.
 
-## Demo
-
-- nXplorer demo server is deployed on Heroku and can be accessed [here](https://nxplorer.herokuapp.com)
-
-## Mono Repo version
-
-- If you are interested in looking at the mono repo version of the project, it is currently being worked on and can be accessed [here](https://github.com/ERS-HCL/nxplorerjs-mono-starter).
-- Since either of the versions are perfectly good solutions, we will be maintaining and enhancing both.
-
 ## Features
 
 - Node JS, Express, Typescript , Dependency Injection base
@@ -126,7 +111,7 @@ See REST API /examples/{id}
 ### REST APIs
 - The API Spec can be downloaded using the following URLS
 ```
-http://localhost:3000/api-docs/Api.yaml
+http://localhost:3000/v1/docs
 ```
 ```
 http://localhost:3000/api-docs/
@@ -302,55 +287,6 @@ up and running in development @: LP-507B9DA1D355 on port: 3000
 up and running in development @: LP-507B9DA1D355 on port: 3000
 ```
 
-## Graphql client apis
-
-- While we build GraphQL based servers, there might a need to get data from other downstream GraphQL based API servers.
-- As an example the graphqlcool/graphql-request module has been used to demonstrate this, using graphqlcool demo graphQL api `https://api.graph.cool/simple/v1/movies`
-
-- API spec
-
-```bash
-query {
-  movie {
-    releaseDate
-    slug
-    actors {
-      name
-    }
-  }
-}
-```
-
-- API output
-
-```json
-{
-  "data": {
-    "movie": {
-      "releaseDate": "2010-08-28T20:00:00.000Z",
-      "slug": "inception",
-      "actors": [
-        {
-          "name": "Leonardo DiCaprio"
-        },
-        {
-          "name": "Ellen Page"
-        },
-        {
-          "name": "Tom Hardy"
-        },
-        {
-          "name": "Joseph Gordon-Levitt"
-        },
-        {
-          "name": "Marion Cotillard"
-        }
-      ]
-    }
-  }
-}
-```
-
 ## Pre-requisites
 
 Install npm and nodeJS
@@ -442,7 +378,7 @@ npm itest:run
 ### Try It
 
 - Point you're browser to [http://localhost:3000](http://localhost:3000).
-- Invoke the example REST endpoints directly or via swagger `http://localhost:3000/swagger`
+- Invoke the example REST endpoints directly or via swagger `http://localhost:3000/v2/docs`
 - Invoke the prometheus metrics using the endpoint `curl http://localhost:3000/metrics`
 - Access in-browser IDE for graphQL `http://localhost:3000/graphiql`
 - Access the graphQL playground app `http://localhost:3000/playground/`
@@ -559,8 +495,8 @@ npm itest:run
 - A sample output
 
 ```bash
-release "nxplorerjs-microservice" deleted
-NAME:   nxplorerjs-microservice
+release "stellar-microservice" deleted
+NAME:   stellar-microservice
 LAST DEPLOYED: Fri Sep 22 22:10:58 2017
 NAMESPACE: default
 STATUS: DEPLOYED
@@ -568,20 +504,20 @@ STATUS: DEPLOYED
 RESOURCES:
 ==> v1/ConfigMap
 NAME                          DATA  AGE
-nxplorerjs-microservice-starter  5     1s
+stellar-microservice-starter  5     1s
 
 ==> v1/Service
 NAME                          CLUSTER-IP  EXTERNAL-IP  PORT(S)       AGE
-nxplorerjs-microservice-starter  10.0.0.196  <nodes>      80:30316/TCP  1s
+stellar-microservice-starter  10.0.0.196  <nodes>      80:30316/TCP  1s
 
 ==> v1beta1/Deployment
 NAME                          DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
-nxplorerjs-microservice-starter  1        1        1           0          1s
+stellar-microservice-starter  1        1        1           0          1s
 
 
 NOTES:
 1. Get the application URL by running these commands:
-  export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services nxplorerjs-microservice-nxplorerjs-microservice-starter)
+  export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services stellar-microservice-stellar-microservice-starter)
   export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
   echo http://$NODE_IP:$NODE_PORT
 
@@ -611,17 +547,6 @@ npm run dash
 - If the JWT Security is enabled (environment variable JWT_AUTH is true) , we need to use the login mutation API to get the sample JWT Token (currently set at an expiry of 1 hour)
 - Step 1 - use the login mutation to get the jwt token for a valid user. For demo purposes any email and password string can be provided. The role is optional. If not provided is defaults to the role 'USER'
 
-```
-mutation {
-  login(email: "tsukhu@nxplorer.com",
-  password:"admin",role:"ADMIN") {
-    id
-    role
-    email
-    jwt
-  }
-}
-```
 
 ![Login Mutation](screenshots/jwt_login_mutation.PNG)
 
@@ -633,7 +558,7 @@ mutation {
 
 ```
 {
-  "Authorization": "Bearer xxx.xxx.xxx"
+  "Authorization": "xxx.xxx.xxx"
 }
 ```
 
@@ -777,7 +702,7 @@ Note: for Sonar 6.x turn sonar56x to “false” and that will generate the test
 npm install -g loadtest
 ```
 
-- Start the nxplorerjs-microservice
+- Start the stellar microservice
 
 ```bash
 npm run start
@@ -788,45 +713,3 @@ npm run start
 ```bash
 loadtest http://localhost:3000/api/v1/examples/1 -t 20 -c 20
 ```
-
-## Deploying to Heroku
-
-```bash
-heroku create
-git push heroku master
-heroku open
-```
-
-or
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-### Future RoadMap
-
-- Add additional health checks
-
-### FAQ
-
-- tslint error appearing in VSCode IDE for node_modules
-
-```json
-// Configure glob patterns of file paths to exclude from linting
-"tslint.exclude": "**/node_modules/**/*.ts"
-```
-
-### Disclaimer
-
-- This is not an official HCL ERS product.
-
-### Thank you
-
-- Special thanks to the JetBrains team for supporting the open source community and this project.
-- This is simply the best IDE for developers. 
-
-[![JetBrains image](public/jetbrains.png)](https://www.jetbrains.com/?from=https://github.com/ERS-HCL/nxplorerjs-microservice-starter)
-
-### License
-
-MIT
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FERS-HCL%2Fnxplorerjs-microservice-starter.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FERS-HCL%2Fnxplorerjs-microservice-starter?ref=badge_large)
