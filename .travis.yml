@@ -21,4 +21,4 @@ jobs:
       script:
         - npm install
         - npm run compile
-        - docker build -t tksukhu/nxplorerjs-microservice .
+        - docker build -t tksukhu/stellar-microservice .

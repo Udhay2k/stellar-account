@@ -12,4 +12,4 @@ s.cp('jwtRS256.key.pub', 'build/');
 s.cp('-R', 'public', 'build/public');
 s.cp('-R', 'server/graphql/schema', 'build/server/graphql');
 s.mkdir('-p', 'build/server/common/swagger');
-s.cp('server/common/swagger/Api.yaml', 'build/server/common/swagger/Api.yaml');
+s.cp('server/common/swagger', 'build/server/common/swagger');
