@@ -4,15 +4,18 @@ import * as _ from 'lodash';
 import '../../common/env';
 
 describe('Example Resolver Tests', () => {
+  let test ;
+
   beforeAll(() => {
-    this.tester = tester({
+    tester({
       url: `http://127.0.0.1:3000/graphql`,
       contentType: 'application/json'
     });
+    
   });
 
   it('should return list of examples', done => {
-    this.tester(
+    test(
       JSON.stringify({
         query: `query {
       examples {
@@ -42,7 +45,7 @@ describe('Example Resolver Tests', () => {
   });
 
   it('should return example based on id', done => {
-    this.tester(
+    test(
       JSON.stringify({
         query: `query {
       example(id: 1) {
@@ -67,7 +70,7 @@ describe('Example Resolver Tests', () => {
   });
 
   it('should return error based on invalid id', done => {
-    this.tester(
+    test(
       JSON.stringify({
         query: `query {
       example(id: 11) {
