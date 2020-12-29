@@ -57,6 +57,7 @@ class HystrixController implements interfaces.Controller {
   public async posts(@request() req: Request, @response() res: Response) {
     this.loggerService.info(req.originalUrl);
     return new Promise((resolve, reject) => {
+      console.dir(req.query.timeOut)
       this.hystrixDemoService.getPosts(req.query.timeOut).subscribe(
         result => {
           this.loggerService.logAPITrace(req, res, HttpStatus.OK);

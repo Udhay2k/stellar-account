@@ -3,7 +3,7 @@ components:
     Common:
       type: object
       properties:
-        _id:
+        id:
           type: string
         name:
           type: string
@@ -29,12 +29,12 @@ components:
         - message
 
     Pagination:
-      type: 'object'
+      type: "object"
       properties:
         count:
           type: integer
         more:
-          type: 'boolean'
+          type: "boolean"
           default: false
         offset:
           type: integer
@@ -49,29 +49,11 @@ components:
         page: 1
         total: 100
 
-    Search:
-      type: 'object'
+    search:
+      type: "object"
       properties:
         count:
           type: integer
-        order:
-          type: array
-          items:
-            type: object
-        page:
-          type: integer
-        term:
-          type: string
-        termfields:
-          type: array
-          items:
-            type: string
-        fields:
-          type: array
-          items:
-            type: string
-        filter:
-          type: object
         exclude:
           type: array
           items:
@@ -80,183 +62,214 @@ components:
           type: array
           items:
             type: string
+        order:
+          type: array
+          items: 
+            type: object
+        page:
+          type: integer
+        pagenationToken:
+          type: string
+        term:
+          type: string
+        fields: 
+          type: array
+          items: 
+            type: string
+        filter:
+          type: object
       example:
         count: 10
-        order: [{field: '_id', order: 'asc'}]
-        page: 1
-        term: ''
-        fields: []
-        termfields: []
-        filter: {}
         exclude: []
         include: []
+        order: [{field: "firstName", order: "asc"}]
+        page: 1
+        pagenationToken: ""
+        term: ""
+        fields: []
+        filter: {}
 
-    Account:
+    Packages:
       type: object
       required:
-        - firstName
-        - lastName
-        - email
+        - name
       properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        gender:
-          type: string
-          x-nullable: true
-          enum:
-            - 'male'
-            - 'female'
-            - 'other'
-            - ''
-        dob:
-          type: string
-          description: 'Date of Birth'
-        address1:
-          type: string
-        address2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip:
-          type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Common'
-        organization:
-          $ref: '#/components/schemas/Common'            
-
-    AccountUpdate:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        gender:
-          type: string
-          x-nullable: true
-          enum:
-            - 'male'
-            - 'female'
-            - 'other'
-            - ''
-        dob:
-          type: string
-          description: 'Date of Birth'
-        address1:
-          type: string
-        address2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip:
-          type: string
-
-    resetmypassword:
-      type: object
-      properties:
-        newPassword:
-          type: string
-
-    userObject:
-      type: object
-      properties:
-        _id:
+        name:
           type: string
         type:
           type: string
+          x-nullable: true
+          description: 'One time, Monthly, Annual'
+          enum:
+            - '1'
+            - '2'
+            - '3'
+            - ''
+        price:
+          type: integer
+          description: 'Price of the packages'
+
+    PackagesUpdate:
+      type: object
+      properties:
         name:
-          type: string          
-
-    changepassword:
-      type: object
-      properties:
-        oldpassword:
           type: string
-        newpassword:
-          type: string
-
-    signup:
-      type: object
-      required:
-        - firstName
-        - lastName
-        - email
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-        password:
-          type: string
-        phone:
-          type: string
-        gender:
+        type:
           type: string
           x-nullable: true
+          description: 'One time, Monthly, Annual'
           enum:
-            - 'male'
-            - 'female'
-            - 'other'
+            - '1'
+            - '2'
+            - '3'
             - ''
-        dob:
-          type: string
-          description: 'Date of Birth'
-        address1:
-          type: string
-        address2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip:
-          type: string
-        roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Common'
+        price:
+          type: integer
+          description: 'Price of the packages'
 
-    Roles:
+    PackageDetails:
       type: object
-      required:
-        - name
+      properties:
+        package_id:
+          type: string
+        item_id:
+          type: string
+        quantity:
+          type: integer
+          description: 'Quantity of the packages'        
+
+    Items:
+      type: object
       properties:
         name:
           type: string
+        type:
+          type: string
+          x-nullable: true
+          description: 'Room, Advanced Room, Booth, Viewer Hours, Cloud Storage, Support Hour'
+          enum:
+            - '1'
+            - '2'
+            - '3'
+            - '4'
+            - '5'
+            - '6'            
+            - ''      
+        payment_cycle:
+          type: string
+          x-nullable: true
+          description: 'One time, Monthly'
+          enum:
+            - '1'
+            - '2'
+            - '3'
+            - '' 
+        unit:
+          type: string
+          x-nullable: true
+          description: 'Room, Hour, GB, Session'
+          enum:
+            - '1'
+            - '2'
+            - '3'
+            - '4'            
+            - ''                             
+        price:
+          type: integer
+          description: 'Price of the packages'
 
-    Organization:
+    Invoice:
       type: object
-      required:
-        - name
       properties:
-        name:
+        issue_date:
           type: string
-        contact:
+        total:
+          type: integer
+        sub_total:
+          type: integer
+        discount:
+          type: integer
+        stripe_payment_id:
           type: string
-        message:
+        payment_date:
+          type: string
+          description: 'date of payment'
+        subscription_details_id:
+          type: string
+        stellar_id:
+          type: string
+        notes:
+          type: string
+
+    InvoiceDetails:
+      type: object
+      properties:
+        item_id:
+          type: string
+        quantity:
+          type: integer
+        unit_price:
+          type: integer
+        total:
+          type: integer
+        invoice_id:
+          type: string
+        start_date:
+          type: string
+          description: 'start date'
+        expiry_date:
+          type: string
+          description: 'expiry date'          
+
+    Subscription:
+      type: object
+      properties:
+        user_id:
+          type: string
+        organization_id:
           type: string    
-        active:
-          type: boolean                
+        organization_type:
+          type: string  
+        stripe_customer_id:
+          type: string    
+        stripe_source_id:
+          type: string                                 
+        auto_renew:
+          type: boolean
+        start_date:
+          type: string
+          description: 'start date'
+        end_date:
+          type: string
+          description: 'end date' 
+        package_id:
+          type: string 
+        stat_std_rooms:
+          type: string     
+        stat_adv_rooms:
+          type: string 
+        stat_booths:
+          type: string 
+        stat_viewer_hrs:
+          type: string 
+        stat_support_hrs:
+          type: string 
+        stat_recording_gb:
+          type: string 
+        stat_act_std_rooms:
+          type: string     
+        stat_act_adv_rooms:
+          type: string 
+        stat_act_booths:
+          type: string 
+        stat_rem_viwer_hrs:
+          type: string 
+        stat_rem_support_hrs:
+          type: string     
+        stat_rem_recording_gb:
+          type: string                                                                                                     
 
-    AccountListApiResponse:
+    PackagesListApiResponse:
       type: 'object'
       properties:
         status:
@@ -267,18 +280,18 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/Account'
+            $ref: '#/components/schemas/Packages'
 
-    AccountApiResponse:
+    PackagesApiResponse:
       type: 'object'
       properties:
         status:
           type: boolean
           default: false
         results:
-          $ref: '#/components/schemas/Account'
+          $ref: '#/components/schemas/Packages'
 
-    RolesListApiResponse:
+    ItemsListApiResponse:
       type: 'object'
       properties:
         status:
@@ -289,16 +302,16 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/Roles'
+            $ref: '#/components/schemas/Items'
 
-    RolesApiResponse:
+    ItemsApiResponse:
       type: 'object'
       properties:
         status:
           type: boolean
           default: false
         results:
-          $ref: '#/components/schemas/Roles'
+          $ref: '#/components/schemas/Items'
 
     CommonListApiResponse:
       type: 'object'
@@ -322,7 +335,7 @@ components:
         results:
           $ref: '#/components/schemas/Common'
 
-    OrganizationListApiResponse:
+    InvoiceListApiResponse:
       type: 'object'
       properties:
         status:
@@ -333,95 +346,146 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/Organization'
+            $ref: '#/components/schemas/Invoice'
 
-    OrganizationApiResponse:
+    InvoiceApiResponse:
       type: 'object'
       properties:
         status:
           type: boolean
           default: false
         results:
-          $ref: '#/components/schemas/Organization'
+          $ref: '#/components/schemas/Invoice'
+
+    InvoiceDetailsListApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceDetails'
+
+    InvoiceDetailsApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        results:
+          $ref: '#/components/schemas/InvoiceDetails'          
+
+    PackageDetailsListApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageDetails'
+
+    PackageDetailsApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        results:
+          $ref: '#/components/schemas/PackageDetails'
+
+    SubscriptionListApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subscription'
+
+    SubscriptionApiResponse:
+      type: 'object'
+      properties:
+        status:
+          type: boolean
+          default: false
+        results:
+          $ref: '#/components/schemas/Subscription'
 
   requestBodies:
-    Account:
+    Packages:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Account'
-      description: Account object that needs to be added to the db
+            $ref: '#/components/schemas/Packages'
+      description: Packages object that needs to be added to the db
       x-name: body
       required: true
 
-    AccountUpdate:
+    PackagesUpdate:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/AccountUpdate'
-      description: Account object that needs to be updated to the db
+            $ref: '#/components/schemas/PackagesUpdate'
+      description: Packages object that needs to be updated to the db
       x-name: body
       required: true      
 
-    SignUp:
+    PackageDetails:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/signup'
-      description: Account object that needs to be added to the db
+            $ref: '#/components/schemas/PackageDetails'
+      description: Package details object that needs to be added to the db
       x-name: body
       required: true
 
-    UserProfileImage:
-      content:
-        multipart/form-data:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-                description: 'Name of image'
-              upfile:
-                type: string
-                format: binary             
-      description: upload object to profile image
-      x-name: body
-
-    ChangePassword:
+    Items:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/changepassword'
-      description: Account object that needs to be added to the db
+            $ref: '#/components/schemas/Items'
+      description: Items object that needs to be added to the db
       x-name: body
       required: true
 
-    ResetMypassword:
+    Invoice:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/resetmypassword'
-      description: Account object that needs to be added to the db
+            $ref: '#/components/schemas/Invoice'
+      description: Invoice object that needs to be added to the db
       x-name: body
       required: true
 
-    Roles:
+    InvoiceDetails:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Roles'
-      description: Roles object that needs to be added to the db
+            $ref: '#/components/schemas/InvoiceDetails'
+      description: Invoice details object that needs to be added to the db
       x-name: body
       required: true
 
-    Organization:
+    Subscription:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Organization'
-      description: Entity object that needs to be added to the db
+            $ref: '#/components/schemas/Subscription'
+      description: Subscription details object that needs to be added to the db
       x-name: body
-      required: true
+      required: true            
 
     Search:
       content:
@@ -430,16 +494,6 @@ components:
             $ref: '#/components/schemas/Search'
       description: get the users list based on query
       x-name: body
-      required: true
-
-    AccountArray:
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Account'
-      description: List of user object
       required: true
 
   securitySchemes:

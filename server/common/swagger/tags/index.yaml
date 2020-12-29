@@ -1,7 +1,13 @@
 tags:
-- name: Account
-  description: Operations about User Account
-- name: Organization
-  description: Operations about Organization      
-- name: Roles
-  description: Operations about Permission
+- name: Packages
+  description: Operations about Packages
+- name: Package Details
+  description: Operations about Packages details
+- name: Items
+  description: Operations about Items      
+- name: Invoice
+  description: Operations about Invoice
+- name: Invoice Details
+  description: Operations about Invoice  details
+- name: Subscription 
+  description: Operations about Subscription details  

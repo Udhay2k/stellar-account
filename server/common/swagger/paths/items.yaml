@@ -1,0 +1,172 @@
+paths:
+  '/item/list':
+    get:
+      tags:
+        - 'Items'
+      summary: 'List out all the items list'
+      operationId: 'list'
+      security:
+        - AccessToken: []
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemsListApiResponse'
+      x-swagger-router-controller: 'items'
+  '/item/metadata':
+    get:
+      tags:
+        - 'Items'
+      summary: 'metadata for dynamic UI'
+      operationId: 'metadata'
+      security: []  
+      parameters:
+        - name: fields
+          in: query
+          description: field values that need to be considered for filter
+          explode: false
+          style: form
+          allowReserved: true               
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid request
+      x-swagger-router-controller: 'items'
+  '/item/search':
+    post:
+      tags:
+        - 'Items'
+      summary: search/filter the items list
+      description: created search/filter object.
+      operationId: 'search'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemsListApiResponse'
+      x-swagger-router-controller: 'items'
+  '/item/search/summary':
+    post:
+      tags:
+        - 'Items'
+      summary: search/filter the items list
+      description: created search/filter object.
+      operationId: 'summary'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemsListApiResponse'
+      x-swagger-router-controller: 'items'
+  '/item/{id}':
+    get:
+      tags:
+        - 'Items'
+      summary: Find item by ID
+      description: Returns a single item
+      operationId: 'get'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of item to return
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemsApiResponse'
+        '400':
+          description: Invalid Item id supplied
+        '404':
+          description: data not found
+      x-swagger-router-controller: 'items'
+    post:
+      tags:
+        - 'Items'
+      summary: update an item
+      operationId: 'update'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of item to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/item'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemsApiResponse'
+      x-swagger-router-controller: 'items'
+  '/item/{id}/delete':
+    post:
+      tags:
+        - 'Items'
+      summary: Deletes a item
+      operationId: 'delete'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: id
+          in: path
+          description: item to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid Items id supplied
+        '404':
+          description: data not found
+      x-swagger-router-controller: 'items'
+  '/item':
+    post:
+      tags:
+        - 'Items'
+      summary: Create a item
+      description: This can only be done by the logged in item.
+      operationId: 'create'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/item'
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: 'items'

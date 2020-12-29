@@ -1,0 +1,172 @@
+paths:
+  '/package/list':
+    get:
+      tags:
+        - 'Packages'
+      summary: 'List out all the package list'
+      operationId: 'list'
+      security:
+        - AccessToken: []
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackagesListApiResponse'
+      x-swagger-router-controller: 'package'
+  '/package/metadata':
+    get:
+      tags:
+        - 'Packages'
+      summary: 'metadata for dynamic UI'
+      operationId: 'metadata'
+      security: []  
+      parameters:
+        - name: fields
+          in: query
+          description: field values that need to be considered for filter
+          explode: false
+          style: form
+          allowReserved: true               
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid request
+      x-swagger-router-controller: 'package'
+  '/package/search':
+    post:
+      tags:
+        - 'Packages'
+      summary: search/filter the package list
+      description: created search/filter object.
+      operationId: 'search'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackagesListApiResponse'
+      x-swagger-router-controller: 'package'
+  '/package/search/summary':
+    post:
+      tags:
+        - 'Packages'
+      summary: search/filter the package list
+      description: created search/filter object.
+      operationId: 'summary'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackagesListApiResponse'
+      x-swagger-router-controller: 'package'
+  '/package/{id}':
+    get:
+      tags:
+        - 'Packages'
+      summary: Find Package by ID
+      description: Returns a single Package
+      operationId: 'get'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of Package to return
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackagesApiResponse'
+        '400':
+          description: Invalid Package id supplied
+        '404':
+          description: data not found
+      x-swagger-router-controller: 'package'
+    post:
+      tags:
+        - 'Packages'
+      summary: update an Package
+      operationId: 'update'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of Package to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/package'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackagesApiResponse'
+      x-swagger-router-controller: 'package'
+  '/package/{id}/delete':
+    post:
+      tags:
+        - 'Packages'
+      summary: Deletes a Package
+      operationId: 'delete'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: id
+          in: path
+          description: Package to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid package id supplied
+        '404':
+          description: data not found
+      x-swagger-router-controller: 'package'
+  '/package':
+    post:
+      tags:
+        - 'Packages'
+      summary: Create a Package
+      description: This can only be done by the logged in Package.
+      operationId: 'create'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/package'
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: 'package'

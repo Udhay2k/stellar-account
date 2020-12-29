@@ -1,9 +1,9 @@
 paths:
-  '/roles/list':
+  '/subscription/list':
     get:
       tags:
-        - 'Roles'
-      summary: 'List out all the entities'
+        - 'Subscription'
+      summary: 'List out all the subscription list'
       operationId: 'list'
       security:
         - AccessToken: []
@@ -14,12 +14,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RolesListApiResponse'
-      x-swagger-router-controller: 'roles'
-  '/roles/metadata':
+                $ref: '#/components/schemas/SubscriptionListApiResponse'
+      x-swagger-router-controller: 'subscription'
+  '/subscription/metadata':
     get:
       tags:
-        - 'Roles'
+        - 'Subscription'
       summary: 'metadata for dynamic UI'
       operationId: 'metadata'
       security: []  
@@ -39,12 +39,12 @@ paths:
           description: successful operation
         '400':
           description: Invalid request
-      x-swagger-router-controller: 'roles'
-  '/roles/search':
+      x-swagger-router-controller: 'subscription'
+  '/subscription/search':
     post:
       tags:
-        - 'Roles'
-      summary: search/filter the entities list
+        - 'Subscription'
+      summary: search/filter the subscription list
       description: created search/filter object.
       operationId: 'search'
       security:
@@ -57,13 +57,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RolesListApiResponse'
-      x-swagger-router-controller: 'roles'
-  '/roles/search/summary':
+                $ref: '#/components/schemas/SubscriptionListApiResponse'
+      x-swagger-router-controller: 'subscription'
+  '/subscription/search/summary':
     post:
       tags:
-        - 'Roles'
-      summary: search/filter the entities list
+        - 'Subscription'
+      summary: search/filter the subscription list
       description: created search/filter object.
       operationId: 'summary'
       security:
@@ -76,21 +76,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RolesListApiResponse'
-      x-swagger-router-controller: 'roles'
-  '/roles/{roleId}':
+                $ref: '#/components/schemas/SubscriptionListApiResponse'
+      x-swagger-router-controller: 'subscription'
+  '/subscription/{id}':
     get:
       tags:
-        - 'Roles'
-      summary: Find role by ID
-      description: Returns a single role
+        - 'Subscription'
+      summary: Find subscription by ID
+      description: Returns a single subscription
       operationId: 'get'
       security:
         - AccessToken: []
       parameters:
-        - name: roleId
+        - name: id
           in: path
-          description: ID of role to return
+          description: ID of subscription to return
           required: true
           style: simple
           explode: false
@@ -102,48 +102,48 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RolesApiResponse'
+                $ref: '#/components/schemas/SubscriptionApiResponse'
         '400':
-          description: Invalid role Id supplied
+          description: Invalid subscription id supplied
         '404':
-          description: role not found
-      x-swagger-router-controller: 'roles'
+          description: data not found
+      x-swagger-router-controller: 'subscription'
     post:
       tags:
-        - 'Roles'
-      summary: update an role
+        - 'Subscription'
+      summary: update an subscription
       operationId: 'update'
       security:
         - AccessToken: []
       parameters:
-        - name: roleId
+        - name: id
           in: path
-          description: ID of role to update
+          description: ID of subscription to update
           required: true
           schema:
             type: string
       requestBody:
-        $ref: '#/components/requestBodies/roles'
+        $ref: '#/components/requestBodies/subscription'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RolesApiResponse'
-      x-swagger-router-controller: 'roles'
-  '/roles/{roleId}/delete':
+                $ref: '#/components/schemas/SubscriptionApiResponse'
+      x-swagger-router-controller: 'subscription'
+  '/subscription/{id}/delete':
     post:
       tags:
-        - 'Roles'
-      summary: Deletes a role
+        - 'Subscription'
+      summary: Deletes a subscription
       operationId: 'delete'
       security:
         - AccessToken: []
       parameters:
-        - name: roleId
+        - name: id
           in: path
-          description: role id to delete
+          description: subscription to delete
           required: true
           schema:
             type: string
@@ -151,22 +151,22 @@ paths:
         '200':
           description: successful operation
         '400':
-          description: Invalid role Id supplied
+          description: Invalid subscription id supplied
         '404':
-          description: role not found
-      x-swagger-router-controller: 'roles'
-  '/roles':
+          description: data not found
+      x-swagger-router-controller: 'subscription'
+  '/subscription':
     post:
       tags:
-        - 'Roles'
-      summary: Create role
-      description: This can only be done by the logged in role.
+        - 'Subscription'
+      summary: Create a subscription
+      description: This can only be done by the logged in subscription.
       operationId: 'create'
       security:
         - AccessToken: []
       requestBody:
-        $ref: '#/components/requestBodies/Roles'
+        $ref: '#/components/requestBodies/subscription'
       responses:
         default:
           description: successful operation
-      x-swagger-router-controller: 'roles'
+      x-swagger-router-controller: 'subscription'

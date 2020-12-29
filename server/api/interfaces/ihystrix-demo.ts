@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
  */
 interface IHystrixDemo {
   start(): Observable<boolean>;
-  getPosts(timeOut: number): Observable<any>;
+  getPosts(timeOut: any): Observable<any>;
 }
 
 export default IHystrixDemo;

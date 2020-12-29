@@ -1,11 +1,12 @@
 paths:
-  '/organization/list':
+  '/invoice/list':
     get:
       tags:
-        - 'Organization'
-      summary: 'List out all the organizations'
+        - 'Invoice'
+      summary: 'List out all the invoice list'
       operationId: 'list'
-      security: []  
+      security:
+        - AccessToken: []
       parameters: []
       responses:
         '200':
@@ -13,12 +14,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationListApiResponse'
-      x-swagger-router-controller: 'organization'
-  '/organization/metadata':
+                $ref: '#/components/schemas/InvoiceListApiResponse'
+      x-swagger-router-controller: 'invoice'
+  '/invoice/metadata':
     get:
       tags:
-        - 'Organization'
+        - 'Invoice'
       summary: 'metadata for dynamic UI'
       operationId: 'metadata'
       security: []  
@@ -38,15 +39,16 @@ paths:
           description: successful operation
         '400':
           description: Invalid request
-      x-swagger-router-controller: 'organization'
-  '/organization/search':
+      x-swagger-router-controller: 'invoice'
+  '/invoice/search':
     post:
       tags:
-        - 'Organization'
-      summary: search/filter the organizations list
+        - 'Invoice'
+      summary: search/filter the invoice list
       description: created search/filter object.
       operationId: 'search'
-      security: []  
+      security:
+        - AccessToken: []
       requestBody:
         $ref: '#/components/requestBodies/Search'
       responses:
@@ -55,16 +57,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationListApiResponse'
-      x-swagger-router-controller: 'organization'
-  '/organization/search/summary':
+                $ref: '#/components/schemas/InvoiceListApiResponse'
+      x-swagger-router-controller: 'invoice'
+  '/invoice/search/summary':
     post:
       tags:
-        - 'Organization'
-      summary: search/filter the organizations list
+        - 'Invoice'
+      summary: search/filter the invoice list
       description: created search/filter object.
       operationId: 'summary'
-      security: []  
+      security:
+        - AccessToken: []
       requestBody:
         $ref: '#/components/requestBodies/Search'
       responses:
@@ -73,21 +76,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationListApiResponse'
-      x-swagger-router-controller: 'organization'
-  '/organization/{orgId}':
+                $ref: '#/components/schemas/InvoiceListApiResponse'
+      x-swagger-router-controller: 'invoice'
+  '/invoice/{id}':
     get:
       tags:
-        - 'Organization'
-      summary: Find organization by ID
-      description: Returns a single organization
+        - 'Invoice'
+      summary: Find invoice by ID
+      description: Returns a single invoice
       operationId: 'get'
       security:
         - AccessToken: []
       parameters:
-        - name: orgId
+        - name: id
           in: path
-          description: ID of organization to return
+          description: ID of invoice to return
           required: true
           style: simple
           explode: false
@@ -99,48 +102,48 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationApiResponse'
+                $ref: '#/components/schemas/InvoiceApiResponse'
         '400':
-          description: Invalid organization Id supplied
+          description: Invalid invoice Id supplied
         '404':
-          description: organization not found
-      x-swagger-router-controller: 'organization'
+          description: invoice not found
+      x-swagger-router-controller: 'invoice'
     post:
       tags:
-        - 'Organization'
-      summary: update an organization
+        - 'Invoice'
+      summary: update an invoice
       operationId: 'update'
       security:
         - AccessToken: []
       parameters:
-        - name: orgId
+        - name: id
           in: path
-          description: ID of organization to update
+          description: ID of invoice to update
           required: true
           schema:
             type: string
       requestBody:
-        $ref: '#/components/requestBodies/Organization'
+        $ref: '#/components/requestBodies/Invoice'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationApiResponse'
-      x-swagger-router-controller: 'organization'
-  '/organization/{orgId}/delete':
+                $ref: '#/components/schemas/InvoiceApiResponse'
+      x-swagger-router-controller: 'invoice'
+  '/invoice/{id}/delete':
     post:
       tags:
-        - 'Organization'
-      summary: Deletes a organization
+        - 'Invoice'
+      summary: Deletes a invoice
       operationId: 'delete'
       security:
         - AccessToken: []
       parameters:
-        - name: orgId
+        - name: id
           in: path
-          description: organization id to delete
+          description: invoice to delete
           required: true
           schema:
             type: string
@@ -148,22 +151,22 @@ paths:
         '200':
           description: successful operation
         '400':
-          description: Invalid organization Id supplied
+          description: Invalid Invoice Id supplied
         '404':
-          description: organization not found
-      x-swagger-router-controller: 'organization'
-  '/organization':
+          description: data not found
+      x-swagger-router-controller: 'invoice'
+  '/invoice':
     post:
       tags:
-        - 'Organization'
-      summary: Create organization
-      description: This can only be done by the logged in organization.
+        - 'Invoice'
+      summary: Create a item
+      description: This can only be done by the logged in invoice.
       operationId: 'create'
       security:
         - AccessToken: []
       requestBody:
-        $ref: '#/components/requestBodies/Organization'
+        $ref: '#/components/requestBodies/Invoice'
       responses:
         default:
           description: successful operation
-      x-swagger-router-controller: 'organization'
+      x-swagger-router-controller: 'invoice'

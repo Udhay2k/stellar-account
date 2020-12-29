@@ -1,0 +1,172 @@
+paths:
+  '/invdetails/list':
+    get:
+      tags:
+        - 'Invoice Details'
+      summary: 'List out all the invoice list'
+      operationId: 'list'
+      security:
+        - AccessToken: []
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceDetailsListApiResponse'
+      x-swagger-router-controller: 'invoicedetails'
+  '/invdetails/metadata':
+    get:
+      tags:
+        - 'Invoice Details'
+      summary: 'metadata for dynamic UI'
+      operationId: 'metadata'
+      security: []  
+      parameters:
+        - name: fields
+          in: query
+          description: field values that need to be considered for filter
+          explode: false
+          style: form
+          allowReserved: true               
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid request
+      x-swagger-router-controller: 'invoicedetails'
+  '/invdetails/search':
+    post:
+      tags:
+        - 'Invoice Details'
+      summary: search/filter the invoice list
+      description: created search/filter object.
+      operationId: 'search'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceDetailsListApiResponse'
+      x-swagger-router-controller: 'invoicedetails'
+  '/invdetails/search/summary':
+    post:
+      tags:
+        - 'Invoice Details'
+      summary: search/filter the invoice list
+      description: created search/filter object.
+      operationId: 'summary'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/Search'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceDetailsApiResponse'
+      x-swagger-router-controller: 'invoicedetails'
+  '/invdetails/{id}':
+    get:
+      tags:
+        - 'Invoice Details'
+      summary: Find invoice by ID
+      description: Returns a single invoice
+      operationId: 'get'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of invoice to return
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceDetailsApiResponse'
+        '400':
+          description: Invalid invoice Id supplied
+        '404':
+          description: invoice not found
+      x-swagger-router-controller: 'invoicedetails'
+    post:
+      tags:
+        - 'Invoice Details'
+      summary: update an invoice
+      operationId: 'update'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of invoice to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/InvoiceDetails'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceDetailsApiResponse'
+      x-swagger-router-controller: 'invoicedetails'
+  '/invdetails/{id}/delete':
+    post:
+      tags:
+        - 'Invoice Details'
+      summary: Deletes a invoice
+      operationId: 'delete'
+      security:
+        - AccessToken: []
+      parameters:
+        - name: id
+          in: path
+          description: invoice to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid Invoice Id supplied
+        '404':
+          description: data not found
+      x-swagger-router-controller: 'invoicedetails'
+  '/invdetails':
+    post:
+      tags:
+        - 'Invoice Details'
+      summary: Create a item
+      description: This can only be done by the logged in invoice.
+      operationId: 'create'
+      security:
+        - AccessToken: []
+      requestBody:
+        $ref: '#/components/requestBodies/InvoiceDetails'
+      responses:
+        default:
+          description: successful operation
+      x-swagger-router-controller: 'invoicedetails'
