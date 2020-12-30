@@ -1,8 +1,7 @@
 import './common/env';
 import Server from './common/server';
-import { ApolloServer } from 'apollo-server-express';
 import * as swaggerTools from 'oas-tools'
-import { configHystrix, configGraphQL } from './common/config';
+import { configHystrix } from './common/config';
 import * as cluster from 'cluster';
 import * as os from 'os';
 import * as http from 'http';
@@ -81,17 +80,12 @@ const setupServer = () => {
     swaggerify(exApp, middleware)
     const app = new Server(exApp).getServer().build();
     bar.tick();
-    const apolloServer: ApolloServer = configGraphQL(app);
-    bar.tick();
     // Create Server so that it can be reused for the
     // configuring the SubscriptionServer
     const ws = http.createServer(app);
+    
     bar.tick();
-    if (process.env.GRAPHQL_SUBSCRIPTIONS === 'true') {
-      apolloServer.installSubscriptionHandlers(ws);
-    }
-    bar.tick();
-    // console.log(apolloServer.subscriptionsPath);
+
     ws.listen(process.env.PORT, (err?: Error) => {
       if (err) {
         throw err;

@@ -6,6 +6,6 @@
     "jshint.enable": false,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
-    "files.autoSave": "off",
+    "files.autoSave": "afterDelay",
     "workbench.colorTheme": "Monokai"
 } // Place your settings in this file to overwrite the default settings

@@ -1,7 +1,7 @@
-export { default as IExample } from './iexample';
-export { default as IHystrixDemo } from './ihystrix-demo';
-export { default as IProduct } from './iproduct';
-export { default as IStarwars } from './istarwars';
-export { default as IUser } from './iuser';
-export { default as IScraper } from './iscraper';
-export { default as ScrapeData } from './scrape-data';
+export { default as IInvoice } from './iinvoice';
+export { default as IItem } from './iitem';
+export { default as ISupscription } from './isubscription';
+export { default as IInvoiceDetails } from './iinvoicedetails';
+export { default as IPackageDetails } from './ipackagedetails';
+export { default as IPackage } from './ipackage';
+export { default as ISubscription } from './isubscription';

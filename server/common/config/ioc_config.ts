@@ -3,27 +3,27 @@ import { Container } from 'inversify';
 
 import { LogService, MetricsService, SecurityService } from '../services';
 import {
-  IExample,
-  IHystrixDemo,
-  IProduct,
-  IStarwars,
-  IUser,
-  IScraper
+  IInvoice,
+  IInvoiceDetails,
+  IItem,
+  IPackage,
+  IPackageDetails,
+  ISubscription
 } from '../../api/interfaces';
 import { ILogger, IMetrics, ISecurity } from '../interfaces';
 import {
-  ExamplesService,
-  ProductService,
-  HystrixDemoService,
-  StarwarsService,
-  UserService,
-  ScraperService
+  InvoiceDetailsService,
+  InvoiceService,
+  ItemService,
+  PackageDetailsService,
+  PackageService,
+  SubscriptionService
 } from '../../api/services';
 import LoggerMiddleware from '../middleware/logger-middleware';
-import '../../api/controllers/hystrix-demo/controller';
-import '../../api/controllers/examples/controller';
-import '../../api/controllers/shop/controller';
-import '../../api/controllers/starwars/controller';
+import '../../api/controllers/invoicedetails/controller';
+import '../../api/controllers/invoice/controller';
+import '../../api/controllers/items/controller';
+import '../../api/controllers/packagedetails/controller';
 import '../../api/controllers/security/controller';
 import '../../api/controllers/scraper/controller';
 import SERVICE_IDENTIFIER from '../constants/identifiers';
@@ -40,16 +40,16 @@ export class IOCContainer {
       const container = new Container();
 
       // Define service bindings
-      container.bind<IExample>(SERVICE_IDENTIFIER.EXAMPLE).to(ExamplesService);
+      container.bind<IItem>(SERVICE_IDENTIFIER.EXAMPLE).to(ItemService);
       container
-        .bind<IHystrixDemo>(SERVICE_IDENTIFIER.HYSTRIX)
-        .to(HystrixDemoService);
-      container.bind<IProduct>(SERVICE_IDENTIFIER.PRODUCT).to(ProductService);
+        .bind<IInvoiceDetails>(SERVICE_IDENTIFIER.HYSTRIX)
+        .to(InvoiceDetailsService);
+      container.bind<IInvoice>(SERVICE_IDENTIFIER.PRODUCT).to(InvoiceService);
       container
-        .bind<IStarwars>(SERVICE_IDENTIFIER.STARWARS)
-        .to(StarwarsService);
-      container.bind<IUser>(SERVICE_IDENTIFIER.USER).to(UserService);
-      container.bind<IScraper>(SERVICE_IDENTIFIER.SCRAPER).to(ScraperService);
+        .bind<IPackage>(SERVICE_IDENTIFIER.STARWARS)
+        .to(PackageService);
+      container.bind<IPackageDetails>(SERVICE_IDENTIFIER.USER).to(PackageDetailsService);
+      container.bind<ISubscription>(SERVICE_IDENTIFIER.SCRAPER).to(SubscriptionService);
       container
         .bind<ILogger>(SERVICE_IDENTIFIER.LOGGER)
         .to(LogService)

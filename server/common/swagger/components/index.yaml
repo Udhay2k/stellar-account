@@ -183,12 +183,12 @@ components:
       properties:
         issue_date:
           type: string
-        total:
-          type: integer
         sub_total:
           type: integer
         discount:
           type: integer
+        total:
+          type: integer          
         stripe_payment_id:
           type: string
         payment_date:
