@@ -25,7 +25,7 @@ class PackageDetailsController implements interfaces.Controller {
   public metricsService: IMetrics;
 
   public constructor(
-    @inject(SERVICE_IDENTIFIER.STARWARS) packageDetailsService: IPackageDetails,
+    @inject(SERVICE_IDENTIFIER.PACKAGEDETAILS) packageDetailsService: IPackageDetails,
     @inject(SERVICE_IDENTIFIER.LOGGER) loggerService: ILogger,
     @inject(SERVICE_IDENTIFIER.METRICS) metricsService: IMetrics
   ) {

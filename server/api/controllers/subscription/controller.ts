@@ -23,7 +23,7 @@ class SubscriptionController implements interfaces.Controller {
   public metricsService: IMetrics;
 
   public constructor(
-    @inject(SERVICE_IDENTIFIER.HYSTRIX) supscriptionService: ISubscription,
+    @inject(SERVICE_IDENTIFIER.SUBSCRIPTION) supscriptionService: ISubscription,
     @inject(SERVICE_IDENTIFIER.LOGGER) loggerService: ILogger,
     @inject(SERVICE_IDENTIFIER.METRICS) metricsService: IMetrics
   ) {

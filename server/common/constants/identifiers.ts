@@ -1,13 +1,13 @@
 const SERVICE_IDENTIFIER = {
   LOGGER: Symbol.for('Logger'),
   METRICS: Symbol.for('Metrics'),
-  SECURITY: Symbol.for('Security'),
-  EXAMPLE: Symbol.for('Example'),
-  HYSTRIX: Symbol.for('Hystrix'),
-  STARWARS: Symbol.for('Starwars'),
-  PRODUCT: Symbol.for('Product'),
-  USER: Symbol.for('User'),
-  SCRAPER: Symbol.for('Scraper'),
+  INVOICE: Symbol.for('Invoice'),
+  ITEM: Symbol.for('Item'),
+  ITEMDETAILS: Symbol.for('ItemDetails'),
+  SUBSCRIPTION: Symbol.for('Subscription'),
+  PACKAGE: Symbol.for('Package'),
+  PACKAGEDETAILS: Symbol.for('PackageDetails'),
+  INVOICEDETAILS: Symbol.for('InvoiceDetails'),
   LOGGER_MIDDLEWARE: Symbol.for('LoggerMiddleware')
 };
 

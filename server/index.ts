@@ -23,7 +23,7 @@ const welcome = port =>
 const setupServer = () => {
   // create server
   const bar = new ProgressBar('Server Startup [:bar] :percent :elapseds', {
-    total: 6
+    total: 3
   });
   bar.tick();
   const exApp = express();

@@ -24,8 +24,6 @@ import '../../api/controllers/invoicedetails/controller';
 import '../../api/controllers/invoice/controller';
 import '../../api/controllers/items/controller';
 import '../../api/controllers/packagedetails/controller';
-import '../../api/controllers/security/controller';
-import '../../api/controllers/scraper/controller';
 import SERVICE_IDENTIFIER from '../constants/identifiers';
 
 /**
@@ -40,16 +38,16 @@ export class IOCContainer {
       const container = new Container();
 
       // Define service bindings
-      container.bind<IItem>(SERVICE_IDENTIFIER.EXAMPLE).to(ItemService);
+      container.bind<IItem>(SERVICE_IDENTIFIER.ITEM).to(ItemService);
       container
-        .bind<IInvoiceDetails>(SERVICE_IDENTIFIER.HYSTRIX)
+        .bind<IInvoiceDetails>(SERVICE_IDENTIFIER.INVOICE)
         .to(InvoiceDetailsService);
-      container.bind<IInvoice>(SERVICE_IDENTIFIER.PRODUCT).to(InvoiceService);
+      container.bind<IInvoice>(SERVICE_IDENTIFIER.INVOICEDETAILS).to(InvoiceService);
       container
-        .bind<IPackage>(SERVICE_IDENTIFIER.STARWARS)
+        .bind<IPackage>(SERVICE_IDENTIFIER.PACKAGE)
         .to(PackageService);
-      container.bind<IPackageDetails>(SERVICE_IDENTIFIER.USER).to(PackageDetailsService);
-      container.bind<ISubscription>(SERVICE_IDENTIFIER.SCRAPER).to(SubscriptionService);
+      container.bind<IPackageDetails>(SERVICE_IDENTIFIER.PACKAGEDETAILS).to(PackageDetailsService);
+      container.bind<ISubscription>(SERVICE_IDENTIFIER.SUBSCRIPTION).to(SubscriptionService);
       container
         .bind<ILogger>(SERVICE_IDENTIFIER.LOGGER)
         .to(LogService)
@@ -57,10 +55,6 @@ export class IOCContainer {
       container
         .bind<IMetrics>(SERVICE_IDENTIFIER.METRICS)
         .to(MetricsService)
-        .inSingletonScope();
-      container
-        .bind<ISecurity>(SERVICE_IDENTIFIER.SECURITY)
-        .to(SecurityService)
         .inSingletonScope();
       container
         .bind<LoggerMiddleware>(SERVICE_IDENTIFIER.LOGGER_MIDDLEWARE)

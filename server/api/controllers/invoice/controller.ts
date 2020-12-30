@@ -20,7 +20,7 @@ class InvoiceController extends BaseHttpController {
   public metricsService: IMetrics;
 
   public constructor(
-    @inject(SERVICE_IDENTIFIER.EXAMPLE) invoiceService: IInvoice,
+    @inject(SERVICE_IDENTIFIER.INVOICE) invoiceService: IInvoice,
     @inject(SERVICE_IDENTIFIER.LOGGER) loggerService: ILogger,
     @inject(SERVICE_IDENTIFIER.METRICS) metricsService: IMetrics
   ) {

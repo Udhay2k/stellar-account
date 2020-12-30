@@ -17,7 +17,7 @@ class ItemController implements interfaces.Controller {
   public metricsService: IMetrics;
 
   public constructor(
-    @inject(SERVICE_IDENTIFIER.PRODUCT) itemService: IItem,
+    @inject(SERVICE_IDENTIFIER.ITEM) itemService: IItem,
     @inject(SERVICE_IDENTIFIER.LOGGER) loggerService: ILogger,
     @inject(SERVICE_IDENTIFIER.METRICS) metricsService: IMetrics
   ) {

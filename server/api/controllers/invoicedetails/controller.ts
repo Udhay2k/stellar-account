@@ -23,7 +23,7 @@ class InvoiceDetailsController implements interfaces.Controller {
   public metricsService: IMetrics;
 
   public constructor(
-    @inject(SERVICE_IDENTIFIER.HYSTRIX) invoiceDetailsService: IInvoiceDetails,
+    @inject(SERVICE_IDENTIFIER.INVOICEDETAILS) invoiceDetailsService: IInvoiceDetails,
     @inject(SERVICE_IDENTIFIER.LOGGER) loggerService: ILogger,
     @inject(SERVICE_IDENTIFIER.METRICS) metricsService: IMetrics
   ) {

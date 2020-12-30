@@ -20,12 +20,12 @@ class PackageController extends BaseHttpController {
   public metricsService: IMetrics;
 
   public constructor(
-    @inject(SERVICE_IDENTIFIER.EXAMPLE) exampleService: IPackage,
+    @inject(SERVICE_IDENTIFIER.PACKAGE) packageService: IPackage,
     @inject(SERVICE_IDENTIFIER.LOGGER) loggerService: ILogger,
     @inject(SERVICE_IDENTIFIER.METRICS) metricsService: IMetrics
   ) {
     super();
-    this.packageService = exampleService;
+    this.packageService = packageService;
     this.loggerService = loggerService;
     this.metricsService = metricsService;
   }
