@@ -9,14 +9,12 @@ export function PackageDetailsFactory(sequelize: Sequelize): PackageDetailsStati
             primaryKey: true,
         },
         package_id: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         item_id: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         quantity: {
             type: DataTypes.DECIMAL,

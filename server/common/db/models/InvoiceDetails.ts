@@ -9,7 +9,8 @@ export function InvoiceDetailsFactory (sequelize: Sequelize): InvoiceDetailsStat
             primaryKey: true,
         },
         item_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         start_date: {
             type: DataTypes.DATE
@@ -27,9 +28,8 @@ export function InvoiceDetailsFactory (sequelize: Sequelize): InvoiceDetailsStat
             type: DataTypes.DECIMAL,
         },
         invoice_id: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         createdAt: {
             type: DataTypes.DATE,

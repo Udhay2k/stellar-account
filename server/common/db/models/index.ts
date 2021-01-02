@@ -38,3 +38,18 @@ export const InvoiceDetails = InvoiceDetailsFactory(dbConfig);
 export const Package = PackageFactory(dbConfig);
 export const PackageDetails = PackageDetailsFactory(dbConfig);
 export const Subscripton = SubscriptionFactory(dbConfig);
+
+
+Package.hasMany(PackageDetails, { onDelete: 'cascade', foreignKey: "package_id", sourceKey: "id" });
+Package.hasMany(Subscripton, { onDelete: 'cascade', foreignKey: "package_id", sourceKey: "id" });
+Item.hasMany(PackageDetails, { onDelete: 'cascade', foreignKey: "item_id", sourceKey: "id" });
+Item.hasMany(InvoiceDetails, { onDelete: 'cascade', foreignKey: "item_id", sourceKey: "id" });
+Invoice.hasMany(InvoiceDetails, { onDelete: 'cascade', foreignKey: "invoice_id", sourceKey: "id" });
+Subscripton.hasMany(Invoice, { onDelete: 'cascade', foreignKey: "subscription_details_id", sourceKey: "id" });
+
+PackageDetails.belongsTo(Package, { onDelete: 'restrict', foreignKey: "package_id", targetKey: "id" });
+Subscripton.belongsTo(Package, { onDelete: 'restrict', foreignKey: "package_id", targetKey: "id" });
+PackageDetails.belongsTo(Item, { onDelete: 'restrict', foreignKey: "item_id", targetKey: "id" });
+InvoiceDetails.belongsTo(Item, { onDelete: 'restrict', foreignKey: "item_id", targetKey: "id" });
+InvoiceDetails.belongsTo(Invoice, { onDelete: 'restrict', foreignKey: "invoice_id", targetKey: "id" });
+Invoice.belongsTo(Subscripton, { onDelete: 'restrict', foreignKey: "subscription_details_id", targetKey: "id" });

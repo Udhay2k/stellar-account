@@ -10,13 +10,11 @@ export function SubscriptionFactory(sequelize: Sequelize): SubscriptionStatic {
         },
         user_id: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
+            allowNull: false
         },
         organization_id: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
+            allowNull: false
         },
         organization_type: {
             type: DataTypes.STRING,
@@ -39,7 +37,8 @@ export function SubscriptionFactory(sequelize: Sequelize): SubscriptionStatic {
             type: DataTypes.STRING
         },
         package_id: {
-            type: DataTypes.STRING
+            type: DataTypes.INTEGER,
+            allowNull: false
         },
         stat_std_rooms: {
             type: DataTypes.STRING

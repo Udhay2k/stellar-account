@@ -27,18 +27,14 @@ export function InvoiceFactory(sequelize: Sequelize): InvoiceStatic {
         },
         stellar_id: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
+            allowNull: false
         },
         stripe_payment_id: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
+            allowNull: false
         },
         subscription_details_id: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
+            type: DataTypes.INTEGER,
         },
         notes: {
             type: DataTypes.TEXT,
