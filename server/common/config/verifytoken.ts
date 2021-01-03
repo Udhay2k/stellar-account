@@ -1,15 +1,5 @@
-const jwt = require("jsonwebtoken");
-
-const verify = (token: string): Promise<any> => {
-    return new Promise(function (resolve, reject) {
-        jwt.verify(token, process.env.JWT_SECRET)
-            .then(data => {
-                resolve(data);
-            }).catch(error => {
-                reject(error);
-            });
-    });
-};
+import * as jwt from "jsonwebtoken";
+import * as validate from './validate';
 
 /**
  * Setup JWT configuration
@@ -17,17 +7,23 @@ const verify = (token: string): Promise<any> => {
 export const verifyToken = async (req: any, obj, token, next): Promise<any> => {
     var err = new Error('Access denied!');
     err['statusCode'] = 403;
+    let jwtPayload = {};
+
+    if (!validate.isEmpty(token)) {
+        next(err);
+        return;
+    }
 
     try {
-        const data = verify(token);
+        jwtPayload = <any>jwt.verify(token, process.env.JWT_SECRET);
 
-        if (data) {
+        if (jwtPayload) {
             next();
         } else {
             next(err);
         }
-    }
-    catch (e) {
+
+    } catch (e) {
         next(err);
     }
 };

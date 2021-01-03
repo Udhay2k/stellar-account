@@ -20,38 +20,37 @@ const welcome = port =>
     'development'} @: ${os.hostname()} on port: ${port}`
   );
 
+const options_object = {
+  controllers: path.join(__dirname, './controllers'),
+  checkControllers: false,
+  loglevel: 'info',
+  logfile: path.join(__dirname, './log/file'),
+  // customLogger: myLogger,
+  strict: true,
+  router: true,
+  validator: true,
+  oasSecurity: true,
+  securityFile: {
+    AccessToken: verifyToken
+  },
+  docs: {
+    apiDocs: process.env.SWAGGER_API_DOCS_ROOT,
+    apiDocsPrefix: '',
+    swaggerUi: process.env.SWAGGER_API_DOCS,
+    swaggerUiPrefix: ''
+  },
+  ignoreUnknownFormats: true
+};
+
 const setupServer = () => {
   // create server
   const bar = new ProgressBar('Server Startup [:bar] :percent :elapseds', {
-    total: 3
+    total: 4
   });
   bar.tick();
   const exApp = express();
 
-  var options_object = {
-    controllers: path.join(__dirname, './controllers'),
-    checkControllers: true,
-    loglevel: 'info',
-    logfile: path.join(__dirname, './log/file'),
-    // customLogger: myLogger,
-    strict: true,
-    router: false,
-    validator: true,
-    oasSecurity: true,
-    securityFile: {
-      AccessToken: verifyToken
-    },
-    docs: {
-      apiDocs: process.env.SWAGGER_API_DOCS_ROOT,
-      apiDocsPrefix: '',
-      swaggerUi: process.env.SWAGGER_API_DOCS,
-      swaggerUiPrefix: ''
-    },
-    ignoreUnknownFormats: true
-  };
-
   swaggerTools.configure(options_object)
-
 
   var yamlKeys = ["tags", "paths", "components"];
   var spec = fs.readFileSync(path.join(__dirname, "/common/swagger/swagger.yaml"), "utf8");
@@ -74,6 +73,8 @@ const setupServer = () => {
 
   }
 
+  bar.tick();
+
   var swaggerDoc = jsyaml.safeLoad(spec);
 
   swaggerTools.initializeMiddleware(swaggerDoc, exApp, (middleware) => {
@@ -83,7 +84,7 @@ const setupServer = () => {
     // Create Server so that it can be reused for the
     // configuring the SubscriptionServer
     const ws = http.createServer(app);
-    
+
     bar.tick();
 
     ws.listen(process.env.PORT, (err?: Error) => {

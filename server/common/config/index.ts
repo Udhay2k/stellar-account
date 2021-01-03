@@ -6,3 +6,4 @@ export { configHystrix } from './hystrix';
 export { configHealthChecks } from './healthchecks';
 export { addCompression } from './compression';
 export { verifyToken } from './verifytoken';
+export * from './validate';

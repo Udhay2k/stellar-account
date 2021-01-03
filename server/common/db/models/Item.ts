@@ -16,7 +16,10 @@ export function ItemFactory(sequelize: Sequelize): ItemStatic {
         type: {
             type: DataTypes.STRING,
         },
-        price_cycle: {
+        price: {
+            type: DataTypes.DECIMAL,
+        },
+        payment_cycle: {
             type: DataTypes.STRING,
         },
         unit: {
