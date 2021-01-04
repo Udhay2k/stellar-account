@@ -15,7 +15,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PackagesListApiResponse'
-      x-swagger-router-controller: 'package'
+      x-swagger-router-controller: 'packageController'
   '/package/metadata':
     get:
       tags:
@@ -39,7 +39,7 @@ paths:
           description: successful operation
         '400':
           description: Invalid request
-      x-swagger-router-controller: 'package'
+      x-swagger-router-controller: 'packageController'
   '/package/search':
     post:
       tags:
@@ -58,7 +58,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PackagesListApiResponse'
-      x-swagger-router-controller: 'package'
+      x-swagger-router-controller: 'packageController'
   '/package/search/summary':
     post:
       tags:
@@ -77,7 +77,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PackagesListApiResponse'
-      x-swagger-router-controller: 'package'
+      x-swagger-router-controller: 'packageController'
   '/package/{id}':
     get:
       tags:
@@ -107,7 +107,7 @@ paths:
           description: Invalid Package id supplied
         '404':
           description: data not found
-      x-swagger-router-controller: 'package'
+      x-swagger-router-controller: 'packageController'
     post:
       tags:
         - 'Packages'
@@ -131,7 +131,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PackagesApiResponse'
-      x-swagger-router-controller: 'package'
+      x-swagger-router-controller: 'packageController'
   '/package/{id}/delete':
     post:
       tags:
@@ -154,7 +154,7 @@ paths:
           description: Invalid package id supplied
         '404':
           description: data not found
-      x-swagger-router-controller: 'package'
+      x-swagger-router-controller: 'packageController'
   '/package':
     post:
       tags:
@@ -169,4 +169,4 @@ paths:
       responses:
         default:
           description: successful operation
-      x-swagger-router-controller: 'package'
+      x-swagger-router-controller: 'packageController'

@@ -74,11 +74,6 @@ export default class ExpressServer {
       // Add Compression support
       addCompression(app);
 
-      console.dir(process.env.SERVER_DB_USER)
-      console.dir(process.env.SERVER_DB_NAME)
-
-    
-
       dbConfig
         .sync().then(() => console.dir("connected to db"))
         .catch((e) => {

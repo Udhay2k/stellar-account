@@ -34,7 +34,7 @@ export function SubscriptionFactory(sequelize: Sequelize): SubscriptionStatic {
             defaultValue: DataTypes.NOW
         },
         auto_renew: {
-            type: DataTypes.STRING
+            type: DataTypes.BOOLEAN
         },
         package_id: {
             type: DataTypes.INTEGER,

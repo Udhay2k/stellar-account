@@ -25,7 +25,6 @@ const options_object = {
   checkControllers: false,
   loglevel: 'info',
   logfile: path.join(__dirname, './log/file'),
-  // customLogger: myLogger,
   strict: true,
   router: true,
   validator: true,
