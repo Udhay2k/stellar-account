@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
-  title: 'Stellar'
-  description: 'Stellar 1.0'
+  title: 'Stellar Account'
+  description: 'Stellar Account 1.0'
   termsOfService: https://www.interactivelife.com/terms/
   contact:
-    email: udhay@interactivelife.com
+    email: support@interactivelife.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -13,9 +13,9 @@ externalDocs:
   description: Find out more about Interactivelife.com
   url: https://www.interactivelife.com
 servers:
-- url: http://localhost:3000/api/v1
+- url: http://localhost:8091/v3
   description: Development server
-- url: https://api.staging.stellar.online/api/v1
+- url: https://api.staging.ili.ms/v3
   description: Staging server  
-- url: https://api.stellar.online/api/v1
+- url: https://api.stellar.online/v3
   description: Production server   

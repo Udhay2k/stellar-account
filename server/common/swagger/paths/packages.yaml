@@ -1,5 +1,5 @@
 paths:
-  '/package/list':
+  '/pkg/list':
     get:
       tags:
         - 'Packages'
@@ -15,8 +15,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PackagesListApiResponse'
-      x-swagger-router-controller: 'packageController'
-  '/package/metadata':
+      x-swagger-router-controller: 'pkg'
+  '/pkg/metadata':
     get:
       tags:
         - 'Packages'
@@ -39,8 +39,8 @@ paths:
           description: successful operation
         '400':
           description: Invalid request
-      x-swagger-router-controller: 'packageController'
-  '/package/search':
+      x-swagger-router-controller: 'pkg'
+  '/pkg/search':
     post:
       tags:
         - 'Packages'
@@ -58,8 +58,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PackagesListApiResponse'
-      x-swagger-router-controller: 'packageController'
-  '/package/search/summary':
+      x-swagger-router-controller: 'pkg'
+  '/pkg/search/summary':
     post:
       tags:
         - 'Packages'
@@ -77,8 +77,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PackagesListApiResponse'
-      x-swagger-router-controller: 'packageController'
-  '/package/{id}':
+      x-swagger-router-controller: 'pkg'
+  '/pkg/{id}':
     get:
       tags:
         - 'Packages'
@@ -107,7 +107,7 @@ paths:
           description: Invalid Package id supplied
         '404':
           description: data not found
-      x-swagger-router-controller: 'packageController'
+      x-swagger-router-controller: 'pkg'
     post:
       tags:
         - 'Packages'
@@ -123,7 +123,7 @@ paths:
           schema:
             type: string
       requestBody:
-        $ref: '#/components/requestBodies/package'
+        $ref: '#/components/requestBodies/PackagesUpdate'
       responses:
         '200':
           description: successful operation
@@ -131,8 +131,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PackagesApiResponse'
-      x-swagger-router-controller: 'packageController'
-  '/package/{id}/delete':
+      x-swagger-router-controller: 'pkg'
+  '/pkg/{id}/delete':
     post:
       tags:
         - 'Packages'
@@ -154,8 +154,8 @@ paths:
           description: Invalid package id supplied
         '404':
           description: data not found
-      x-swagger-router-controller: 'packageController'
-  '/package':
+      x-swagger-router-controller: 'pkg'
+  '/pkg':
     post:
       tags:
         - 'Packages'
@@ -165,8 +165,8 @@ paths:
       security:
         - AccessToken: []
       requestBody:
-        $ref: '#/components/requestBodies/package'
+        $ref: '#/components/requestBodies/Packages'
       responses:
         default:
           description: successful operation
-      x-swagger-router-controller: 'packageController'
+      x-swagger-router-controller: 'pkg'
