@@ -26,9 +26,9 @@ const options_object = {
   loglevel: 'info',
   logfile: path.join(__dirname, './log/file'),
   strict: true,
-  router: true,
+  router: false,
   validator: true,
-  oasSecurity: true,
+  oasSecurity: false,
   securityFile: {
     AccessToken: verifyToken
   },
